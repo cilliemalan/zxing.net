@@ -181,63 +181,7 @@ namespace ZXing.PDF417.Internal
                 var a = Math.Min(a1, a2);
                 if (Math.Abs(a) > rotationThresh)
                 {
-                    float cosA = (float)Math.Cos(a);
-                    float sinA = (float)Math.Sin(a);
-                    float w = src.Width;
-                    float h = src.Height;
-                    float w2 = w * 0.5f;
-                    float h2 = h * 0.5f;
-
-                    float x0 = (-w2) * cosA - (-h2) * sinA;
-                    float y0 = (-w2) * sinA + (-h2) * cosA;
-                    float x1 = (w2) * cosA - (-h2) * sinA;
-                    float y1 = (w2) * sinA + (-h2) * cosA;
-                    float x2 = (w2) * cosA - (h2) * sinA;
-                    float y2 = (w2) * sinA + (h2) * cosA;
-                    float x3 = (-w2) * cosA - (h2) * sinA;
-                    float y3 = (-w2) * sinA + (h2) * cosA;
-                    float minx = Math.Min(Math.Min(x0, x1), Math.Min(x2, x3));
-                    float maxx = Math.Max(Math.Max(x0, x1), Math.Max(x2, x3));
-                    float miny = Math.Min(Math.Min(y0, y1), Math.Min(y2, y3));
-                    float maxy = Math.Max(Math.Max(y0, y1), Math.Max(y2, y3));
-
-                    float neww = maxx - minx;
-                    float newh = maxy - miny;
-                    int nw2 = (int)Math.Ceiling(neww * 0.5f);
-                    int nh2 = (int)Math.Ceiling(newh * 0.5f);
-
-                    BitMatrix dest = new BitMatrix(nw2*2, nh2*2);
-
-                    Func<int, int, ResultPoint> rotate = (px, py) =>
-                     {
-                         var x = px - nw2;
-                         var y = py - nh2;
-                         var rx = x * cosA - y * sinA;
-                         var ry = x * sinA + y * cosA;
-
-                         return new ResultPoint(rx + w2, ry + h2);
-                     };
-
-                    for (int y = 0; y < dest.Height; y++)
-                    {
-                        for (int x = 0; x < dest.Width; x++)
-                        {
-                            var rotatedPoint = rotate(x, y);
-                            var nx = (int)rotatedPoint.X;
-                            var ny = (int)rotatedPoint.Y;
-
-                            if (nx >= 0 && nx < src.Width && ny >= 0 && ny < src.Height)
-                            {
-                                dest[x, y] = src[nx, ny];
-                            }
-                            else
-                            {
-                                dest[x, y] = false;
-                            }
-                        }
-                    }
-
-                    return dest;
+                    return src.Transform(new RotationTransformation(a, src.Width, src.Height));
                 }
             }
 
