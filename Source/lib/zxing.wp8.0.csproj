@@ -163,6 +163,7 @@
     <Compile Include="common\BitArray.cs" />
     <Compile Include="common\BitMatrix.cs" />
     <Compile Include="common\BitMatrix.Silverlight.cs" />
+    <Compile Include="common\BitMatrix.Transform.cs" />
     <Compile Include="common\BitSource.cs" />
     <Compile Include="common\CharacterSetECI.cs" />
     <Compile Include="common\DecoderResult.cs" />
