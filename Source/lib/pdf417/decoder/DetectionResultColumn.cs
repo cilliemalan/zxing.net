@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.Globalization;
 using System.Text;
 
@@ -155,7 +156,15 @@ namespace ZXing.PDF417.Internal
             }
          }
          return builder.ToString();
-         // return "Valid Codewords: " + (from cw in Codewords where cw != null select cw).Count().ToString();
-      }
-   }
+            // return "Valid Codewords: " + (from cw in Codewords where cw != null select cw).Count().ToString();
+        }
+
+        internal void Flip()
+        {
+            int N = Codewords.Length;
+            Codeword[] cw = new Codeword[N];
+            for (int i = 0; i < cw.Length; i++) cw[i] = Codewords[N - i - 1];
+            Codewords = cw;
+        }
+    }
 }

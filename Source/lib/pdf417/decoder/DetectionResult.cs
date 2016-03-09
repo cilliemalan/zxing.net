@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.Globalization;
 using System.Text;
 
@@ -201,11 +202,19 @@ namespace ZXing.PDF417.Internal
          return unadjustedCount;
       }
 
-      /// <summary>
-      /// Adjusts the row numbers from Left Row Indicator.
-      /// </summary>
-      /// <returns> Unadjusted row Count.</returns>
-      private int adjustRowNumbersFromLRI()
+        internal void FlipVertically()
+        {
+            for (int i = 0; i < DetectionResultColumns.Length; i++)
+            {
+                DetectionResultColumns[i].Flip();
+            }
+        }
+
+        /// <summary>
+        /// Adjusts the row numbers from Left Row Indicator.
+        /// </summary>
+        /// <returns> Unadjusted row Count.</returns>
+        private int adjustRowNumbersFromLRI()
       {
          if (DetectionResultColumns[0] == null)
          {
