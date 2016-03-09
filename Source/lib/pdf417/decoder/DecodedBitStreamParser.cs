@@ -183,8 +183,9 @@ namespace ZXing.PDF417.Internal
          {
             return null;
          }
-
-         var decoderResult = new DecoderResult(null, result.ToString(), null, ecLevel);
+         string resultString = result.ToString();
+         byte[] resultBytes = (encoding ?? Encoding.ASCII).GetBytes(resultString);
+         var decoderResult = new DecoderResult(resultBytes, result.ToString(), null, ecLevel);
          decoderResult.Other = resultMetadata;
          return decoderResult;
       }
