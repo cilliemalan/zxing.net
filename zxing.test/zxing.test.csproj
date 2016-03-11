@@ -74,6 +74,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Pdf417\driverslicense_fake.png" />
     <Content Include="Images\Pdf417\pixelperfect.png" />
     <Content Include="Images\Pdf417\rotated_disc.jpg" />
     <Content Include="Images\Pdf417\straight_disc.jpg" />
