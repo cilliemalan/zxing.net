@@ -39,5 +39,27 @@ namespace zxing.test
 
             Assert.Equal(expected, decoded);
         }
+
+        [Fact]
+        public void RotatedDiscTest()
+        {
+            var image = Support.Image("Pdf417/rotated_disc.jpg");
+            var expected = "%MVL1CC08%0142%4046T0BH%1%4046047ZL6SH%DS19LGGP%VSX247W%Hatch back / Luikrug%HONDA%BRIO%White / Wit%MAKDD1780FN000309%L12B34004104%2016-04-30%";
+
+            string decoded = barcodereader.Decode(image)?.Text;
+
+            Assert.Equal(expected, decoded);
+        }
+
+        [Fact]
+        public void StraightDiscTest()
+        {
+            var image = Support.Image("Pdf417/straight_disc.jpg");
+            var expected = "%MVL1CC08%0142%4046T0BH%1%4046047ZL6SH%DS19LGGP%VSX247W%Hatch back / Luikrug%HONDA%BRIO%White / Wit%MAKDD1780FN000309%L12B34004104%2016-04-30%";
+
+            string decoded = barcodereader.Decode(image)?.Text;
+
+            Assert.Equal(expected, decoded);
+        }
     }
 }
